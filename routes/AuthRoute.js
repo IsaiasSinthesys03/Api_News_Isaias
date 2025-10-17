@@ -106,7 +106,14 @@ api.post('/auth/login', validatorLogin, login);
  *       500:
  *         description: Error interno del servidor.
  */
-api.post('/auth/registro', validatorRegister, register);
+// Wrapper para manejar errores en funciones async
+function asyncHandler(fn) {
+	return function (req, res, next) {
+		Promise.resolve(fn(req, res, next)).catch(next);
+	};
+}
+
+api.post('/auth/registro', validatorRegister, asyncHandler(register));
 
 module.exports = api;
 
