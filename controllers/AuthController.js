@@ -30,35 +30,43 @@ const login = (request, response) => {
 };
 
 const register = async (request, response) => {
-    const errors = validationResult(request);
-    if (!errors.isEmpty()) {
-        return response.status(422).json({ errors: errors.mapped() });
+    try {
+        const errors = validationResult(request);
+        if (!errors.isEmpty()) {
+            return response.status(422).json({ errors: errors.mapped() });
+        }
+
+        const perfil_id = request.body.perfil_id || 2;
+        // Verificar si el perfil existe, si no, crearlo
+        let perfil = await Profile.findByPk(perfil_id);
+        if (!perfil) {
+            try {
+                perfil = await Profile.create({ id: perfil_id, nombre: 'Contribuidor' });
+            } catch (e) {
+                // Si el perfil ya existe por race condition, lo ignoramos
+            }
+        }
+
+        // Mapeo estricto de campos
+        const userData = {
+            username: request.body.nick,
+            email: request.body.email,
+            password: request.body.password,
+            perfil_id: perfil_id,
+            activo: true
+        };
+
+        // Validación extra: nick, email y password deben existir
+        if (!userData.username || !userData.email || !userData.password) {
+            return response.status(422).json({ error: 'Faltan campos obligatorios: nick, email o password' });
+        }
+
+        const nuevoUsuario = await User.create(userData);
+        return response.status(201).json(nuevoUsuario);
+    } catch (err) {
+        console.error('Error detallado al crear usuario:', err);
+        return response.status(500).json({ error: 'Error al crear el usuario', detalle: err.message });
     }
-
-    const perfil_id = request.body.perfil_id || 2;
-    // Verificar si el perfil existe, si no, crearlo
-    let perfil = await Profile.findByPk(perfil_id);
-    if (!perfil) {
-        perfil = await Profile.create({ id: perfil_id, nombre: 'Contribuidor' });
-    }
-
-    const userData = {
-        username: request.body.nick,
-        email: request.body.email,
-        password: request.body.password,
-        perfil_id: perfil_id,
-        activo: true
-    };
-
-    User.create(userData)
-        .then(newEntitie => {
-            response.status(201).json(newEntitie);
-        })
-        .catch(err => {
-            // Mejor log para depuración
-            console.error('Error detallado al crear usuario:', err);
-            response.status(500).send('Error al crear el usuario');
-        });
 };
 
 module.exports = {
