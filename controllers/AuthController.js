@@ -1,5 +1,6 @@
 // controllers/AuthController.js (Versión Final con JWT)
 const { User } = require('../models/UserModel');
+const { Profile } = require('../models/ProfileModel');
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 
