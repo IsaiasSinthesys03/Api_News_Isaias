@@ -28,16 +28,10 @@ const api = express.Router();
  *     UserRegistration:
  *       type: object
  *       required:
- *         - nombre
- *         - apellidos
  *         - nick
  *         - email
  *         - password
  *       properties:
- *         nombre:
- *           type: string
- *         apellidos:
- *           type: string
  *         nick:
  *           type: string
  *         email:
@@ -47,8 +41,6 @@ const api = express.Router();
  *           type: string
  *           format: password
  *       example:
- *         nombre: "Nuevo"
- *         apellidos: "Usuario"
  *         nick: "newuser"
  *         email: "nuevo@example.com"
  *         password: "passwordsegura"

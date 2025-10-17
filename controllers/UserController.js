@@ -48,7 +48,21 @@ const create = (request, response) => {
     }
 
     console.log('➡️  Intentando crear un nuevo usuario con body:', request.body);
-    User.create(request.body)
+    // Solo usar campos válidos del modelo
+    const userData = {
+        username: request.body.username,
+        email: request.body.email,
+        password: request.body.password,
+        perfil_id: request.body.perfil_id,
+        activo: request.body.activo,
+        UserAlta: request.body.UserAlta,
+        FechaAlta: request.body.FechaAlta,
+        UserMod: request.body.UserMod,
+        FechaMod: request.body.FechaMod,
+        UserBaja: request.body.UserBaja,
+        FechaBaja: request.body.FechaBaja
+    };
+    User.create(userData)
         .then(newEntitie => {
             console.log('✅  Usuario creado exitosamente.');
             response.status(201).json(newEntitie);
@@ -68,7 +82,21 @@ const update = (request, response) => {
 
     const id = request.params.id;
     console.log(`➡️  Intentando actualizar usuario con ID: ${id}`);
-    User.update(request.body, { where: { id: id } })
+    // Solo usar campos válidos del modelo
+    const userData = {
+        username: request.body.username,
+        email: request.body.email,
+        password: request.body.password,
+        perfil_id: request.body.perfil_id,
+        activo: request.body.activo,
+        UserAlta: request.body.UserAlta,
+        FechaAlta: request.body.FechaAlta,
+        UserMod: request.body.UserMod,
+        FechaMod: request.body.FechaMod,
+        UserBaja: request.body.UserBaja,
+        FechaBaja: request.body.FechaBaja
+    };
+    User.update(userData, { where: { id: id } })
         .then(numRowsUpdatedArray => {
             const numRowsUpdated = numRowsUpdatedArray[0];
             console.log(`✅  Se actualizaron ${numRowsUpdated} usuarios.`);

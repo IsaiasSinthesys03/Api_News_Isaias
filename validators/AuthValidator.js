@@ -10,17 +10,9 @@ const validatorLogin = [
 ];
 
 const validatorRegister = [
-    check('nombre').notEmpty().withMessage('El campo nombre es obligatorio')
-        .isString().withMessage('El campo nombre debe ser texto')
-        .isLength({ min: 2, max: 100 }).withMessage('El campo debe tener entre 2 y 100 caracteres'),
-
-    check('apellidos').notEmpty().withMessage('El campo apellidos es obligatorio')
-        .isString().withMessage('El campo apellidos debe ser texto')
-        .isLength({ min: 2, max: 100 }).withMessage('El campo apellidos debe tener entre 2 y 100 caracteres'),
-
     check('nick').notEmpty().withMessage('El campo nick es obligatorio')
         .isString().withMessage('El campo nick debe ser texto')
-        .isLength({ min: 2, max: 20 }).withMessage('El campo debe tener entre 2 y 20 caracteres'),
+        .isLength({ min: 2, max: 20 }).withMessage('El campo nick debe tener entre 2 y 20 caracteres'),
 
     check('email').notEmpty().withMessage('El campo email es obligatorio')
         .isEmail().withMessage('El campo email debe ser un correo válido')
