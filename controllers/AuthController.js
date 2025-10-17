@@ -10,8 +10,8 @@ const login = (request, response) => {
     }
     User.findOne({
         where: {
-            correo: request.body.correo,
-            contraseña: request.body.contraseña,
+            email: request.body.email,
+            password: request.body.password,
             activo: true
         },
         attributes: ['id', 'perfil_id', 'nombre', 'apellidos', 'nick']

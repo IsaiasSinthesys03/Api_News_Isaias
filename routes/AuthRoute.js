@@ -11,28 +11,28 @@ const api = express.Router();
  *     LoginCredentials:
  *       type: object
  *       required:
- *         - correo
- *         - contraseña
+ *         - email
+ *         - password
  *       properties:
- *         correo:
+ *         email:
  *           type: string
  *           format: email
  *           description: Correo electrónico del usuario.
- *         contraseña:
+ *         password:
  *           type: string
  *           format: password
  *           description: Contraseña del usuario.
  *       example:
- *         correo: "usuario@example.com"
- *         contraseña: "password123"
+ *         email: "usuario@example.com"
+ *         password: "password123"
  *     UserRegistration:
  *       type: object
  *       required:
  *         - nombre
  *         - apellidos
  *         - nick
- *         - correo
- *         - contraseña
+ *         - email
+ *         - password
  *       properties:
  *         nombre:
  *           type: string
@@ -40,18 +40,18 @@ const api = express.Router();
  *           type: string
  *         nick:
  *           type: string
- *         correo:
+ *         email:
  *           type: string
  *           format: email
- *         contraseña:
+ *         password:
  *           type: string
  *           format: password
  *       example:
  *         nombre: "Nuevo"
  *         apellidos: "Usuario"
  *         nick: "newuser"
- *         correo: "nuevo@example.com"
- *         contraseña: "passwordsegura"
+ *         email: "nuevo@example.com"
+ *         password: "passwordsegura"
  * tags:
  *   - name: Authentication
  *     description: Endpoints para registro e inicio de sesión
