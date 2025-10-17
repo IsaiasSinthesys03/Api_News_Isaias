@@ -34,16 +34,24 @@ const register = (request, response) => {
     if (!errors.isEmpty()) {
         return response.status(422).json({ errors: errors.mapped() });
     }
-    request.body.perfil_id = 2;
-    request.body.activo = true;
 
-    User.create(request.body).then(
-        newEntitie => {
+    // Construir objeto alineado al modelo User
+    const userData = {
+        username: request.body.nick, // Mapeo correcto
+        email: request.body.email,
+        password: request.body.password,
+        perfil_id: 2,
+        activo: true
+    };
+
+    User.create(userData)
+        .then(newEntitie => {
             response.status(201).json(newEntitie);
-        }
-    )
+        })
         .catch(err => {
-            response.status(500).send('Error al crear');
+            // Mejor log para depuración
+            console.error('Error detallado al crear usuario:', err);
+            response.status(500).send('Error al crear el usuario');
         });
 };
 
