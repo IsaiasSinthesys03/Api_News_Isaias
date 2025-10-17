@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { connection } = require("../config.db");
+const { Profile } = require('./ProfileModel');
 
 const User = connection.define('user', {
   username: {
@@ -14,6 +15,10 @@ const User = connection.define('user', {
   },
   password: {
     type: DataTypes.STRING,
+    allowNull: false
+  },
+  perfil_id: {
+    type: DataTypes.INTEGER,
     allowNull: false
   },
   activo: {
@@ -52,5 +57,8 @@ const User = connection.define('user', {
     defaultValue:'1990-01-01T00:00:00.000Z'
   },
 })
+
+// Define la relación para establecer la clave foránea
+User.belongsTo(Profile, { as: 'perfil', foreignKey: 'perfil_id' });
 
 module.exports = { User };
