@@ -29,18 +29,24 @@ const login = (request, response) => {
         });
 };
 
-const register = (request, response) => {
+const register = async (request, response) => {
     const errors = validationResult(request);
     if (!errors.isEmpty()) {
         return response.status(422).json({ errors: errors.mapped() });
     }
 
-    // Construir objeto alineado al modelo User
+    const perfil_id = request.body.perfil_id || 2;
+    // Verificar si el perfil existe, si no, crearlo
+    let perfil = await Profile.findByPk(perfil_id);
+    if (!perfil) {
+        perfil = await Profile.create({ id: perfil_id, nombre: 'Contribuidor' });
+    }
+
     const userData = {
-        username: request.body.nick, // Mapeo correcto
+        username: request.body.nick,
         email: request.body.email,
         password: request.body.password,
-        perfil_id: 2,
+        perfil_id: perfil_id,
         activo: true
     };
 
