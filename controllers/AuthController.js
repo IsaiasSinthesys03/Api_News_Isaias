@@ -37,7 +37,7 @@ const register = async (request, response) => {
             return response.status(422).json({ errors: errors.mapped() });
         }
 
-        const perfil_id = request.body.perfil_id || 2;
+        const perfil_id = request.body.perfil_id || 2; // Por defecto, los nuevos usuarios son contribuidores
         // Verificar si el perfil existe, si no, crearlo
         let perfil = await Profile.findByPk(perfil_id);
         if (!perfil) {
