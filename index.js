@@ -38,8 +38,8 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: `http://localhost:3000`,
-                description: 'Servidor de Desarrollo'
+                url: 'https://api-news-isaias.onrender.com',
+                description: 'Servidor de Producción'
             }
         ],
         tags: [
