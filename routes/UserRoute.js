@@ -12,46 +12,35 @@ const api = express.Router();
  *     User:
  *       type: object
  *       required:
- *         - nombre
- *         - apellidos
- *         - nick
- *         - correo
- *         - contraseña
+ *         - username
+ *         - email
+ *         - password
  *         - perfil_id
  *       properties:
  *         id:
  *           type: integer
  *           description: ID autogenerado para el usuario.
- *         nombre:
+ *         username:
  *           type: string
- *           description: Nombre del usuario.
- *         apellidos:
- *           type: string
- *           description: Apellidos del usuario.
- *         nick:
- *           type: string
- *           description: Nickname o apodo único del usuario.
- *         correo:
+ *           description: Nombre de usuario único.
+ *         email:
  *           type: string
  *           format: email
  *           description: Correo electrónico único del usuario.
- *         contraseña:
+ *         password:
  *           type: string
  *           format: password
- *           description: Contraseña del usuario (mínimo 8 caracteres).
+ *           description: Contraseña del usuario.
  *         perfil_id:
  *           type: integer
- *           description: ID del perfil asociado al usuario.
+ *           description: ID del perfil asociado al usuario (1=Admin, 2=Contribuidor).
  *         activo:
  *           type: boolean
  *           description: Indica si el usuario está activo.
  *       example:
- *         id: 1
- *         nombre: "Juan"
- *         apellidos: "Pérez"
- *         nick: "juanp"
- *         correo: "juan.perez@example.com"
- *         contraseña: "password123"
+ *         username: "juanperez"
+ *         email: "juanito@example.com"
+ *         password: "password123"
  *         perfil_id: 1
  *         activo: true
  */
