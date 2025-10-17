@@ -6,7 +6,7 @@ require('dotenv').config();
 const dbUrl = process.env.DATABASE_URL;
 
 if (!dbUrl) {
-  throw new Error("postgresql://db_news_y4gb_user:FripLbBVYpVKTV08pK71dgWeAgq5c0HK@dpg-d3p0u1t6ubrc73aljse0-a.oregon-postgres.render.com/db_news_y4gb");
+  throw new Error("postgresql://db_news_01_user:ZQSZNIyq2TsbAQXkva47nO9ybKtK8NkV@dpg-d3p746p5pdvs73aeao2g-a.oregon-postgres.render.com/db_news_01");
 }
 
 const connection = new Sequelize(dbUrl, {
